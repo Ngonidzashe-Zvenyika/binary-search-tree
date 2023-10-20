@@ -54,14 +54,57 @@ class BalancedBinaryTree {
       data < previous.data ? (previous.left = node) : (previous.right = node);
     } else this.root = node;
   }
+
+  delete(data) {
+    let previous;
+    let current = this.root;
+    while (current) {
+      if (data === current.data) {
+        break;
+      } else {
+        previous = current;
+        current = data < current.data ? current.left : current.right;
+      }
+    }
+    if (current) {
+      if (current.left && current.right) {
+        let replacementParent;
+        let replacement = current.right;
+        while (replacement.left) {
+          replacementParent = replacement;
+          replacement = replacement.left;
+        }
+        replacement.left = current.left;
+        if (replacementParent) {
+          replacementParent.left = replacement.right;
+          replacement.right = current.right;
+        }
+        if (previous) {
+          replacement.data < previous.data
+            ? (previous.left = replacement)
+            : (previous.right = replacement);
+        } else this.root = replacement;
+      } else if (current.left || current.right) {
+        const replacement = current.right || current.left;
+        if (previous) {
+          replacement.data < previous.data
+            ? (previous.left = replacement)
+            : (previous.right = replacement);
+        } else this.root = replacement;
+      } else {
+        if (previous) {
+          current.data < previous.data
+            ? (previous.left = null)
+            : (previous.right = null);
+        } else this.root = null;
+      }
+    }
+  }
 }
 
 const tree = new BalancedBinaryTree([
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324,
 ]);
-
-tree.insert(21);
-tree.insert(7);
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
