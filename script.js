@@ -100,6 +100,84 @@ class BalancedBinaryTree {
       }
     }
   }
+
+  find(data) {
+    let current = this.root;
+    while (current) {
+      if (data === current.data) {
+        return current;
+      } else {
+        current = data < current.data ? current.left : current.right;
+      }
+    }
+    return current;
+  }
+
+  levelOrder(callback) {
+    let queue = [this.root];
+    let array = [];
+    while (queue.length > 0) {
+      let current = queue.shift();
+      if (current) {
+        array.push(current.data);
+        if (callback) callback(current);
+        if (current.left) queue.push(current.left);
+        if (current.right) queue.push(current.right);
+      }
+    }
+    return array;
+  }
+
+  inOrder(current, callback, array = []) {
+    if (callback) {
+      if (current) {
+        this.inOrder(current.left, callback, array);
+        callback(current);
+        this.inOrder(current.right, callback, array);
+      }
+    } else {
+      if (current) {
+        this.inOrder(current.left, callback, array);
+        array.push(current.data);
+        this.inOrder(current.right, callback, array);
+      }
+      return array;
+    }
+  }
+
+  preOrder(current, callback, array = []) {
+    if (callback) {
+      if (current) {
+        callback(current);
+        this.preOrder(current.left, callback, array);
+        this.preOrder(current.right, callback, array);
+      }
+    } else {
+      if (current) {
+        array.push(current.data);
+        this.preOrder(current.left, callback, array);
+        this.preOrder(current.right, callback, array);
+      }
+      return array;
+    }
+  }
+
+  postOrder(current, callback, array = []) {
+    if (callback) {
+      if (current) {
+        this.postOrder(current.left, callback, array);
+        this.postOrder(current.right, callback, array);
+        callback(current);
+      }
+    } else {
+      if (current) {
+        this.postOrder(current.left, callback, array);
+        this.postOrder(current.right, callback, array);
+        array.push(current.data);
+      }
+      return array;
+    }
+  }
 }
 
 const tree = new BalancedBinaryTree([
