@@ -178,6 +178,22 @@ class BalancedBinaryTree {
       return array;
     }
   }
+
+    height(node) {
+    let left = 0;
+    let right = 0;
+    if (node) {
+      if (node.left) {
+        left += 1;
+        left += this.height(node.left);
+      }
+      if (node.right) {
+        right += 1;
+        right += this.height(node.right);
+      }
+      return left > right ? left : right;
+    }
+  }
 }
 
 const tree = new BalancedBinaryTree([
