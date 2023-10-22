@@ -223,6 +223,16 @@ class BalancedBinaryTree {
       } else if (node instanceof TreeNode) return true;
     }
   }
+
+  rebalance() {
+    if (this.isBalanced(this.root)) return;
+    else if (this.root) {
+      let array = this.inOrder(this.root);
+      const start = 0;
+      const end = array.length - 1;
+      this.root = buildTree(array, start, end);
+    }
+  }
 }
 
 const tree = new BalancedBinaryTree([
