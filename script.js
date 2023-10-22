@@ -110,7 +110,6 @@ class BalancedBinaryTree {
         current = data < current.data ? current.left : current.right;
       }
     }
-    return current;
   }
 
   levelOrder(callback) {
@@ -179,10 +178,10 @@ class BalancedBinaryTree {
     }
   }
 
-    height(node) {
-    let left = 0;
-    let right = 0;
+  height(node) {
     if (node) {
+      let left = 0;
+      let right = 0;
       if (node.left) {
         left += 1;
         left += this.height(node.left);
@@ -191,7 +190,22 @@ class BalancedBinaryTree {
         right += 1;
         right += this.height(node.right);
       }
-      return left > right ? left : right;
+      if (node instanceof TreeNode) return left > right ? left : right;
+    }
+  }
+
+  depth(node) {
+    if (node) {
+      let current = this.root;
+      let count = 0;
+      while (current) {
+        if (node.data === current.data) {
+          return count;
+        } else {
+          count += 1;
+          current = node.data < current.data ? current.left : current.right;
+        }
+      }
     }
   }
 }
