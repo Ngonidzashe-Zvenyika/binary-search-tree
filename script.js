@@ -208,6 +208,21 @@ class BalancedBinaryTree {
       }
     }
   }
+
+  isBalanced(node) {
+    if (node) {
+      if (node.left && node.right) {
+        let leftSubtree = this.isBalanced(node.left);
+        let rightSubtree = this.isBalanced(node.right);
+        if (leftSubtree && rightSubtree) {
+          return true;
+        } else return false;
+      } else if (node.left || node.right) {
+        let remainingSubtree = node.left || node.right;
+        return remainingSubtree.left || remainingSubtree.right ? false : true;
+      } else if (node instanceof TreeNode) return true;
+    }
+  }
 }
 
 const tree = new BalancedBinaryTree([
