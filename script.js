@@ -30,7 +30,6 @@ class BalancedBinaryTree {
   constructor(array) {
     array = removeDuplicates(array);
     array.sort((a, b) => (a < b ? -1 : 1));
-    console.log(array);
     const start = 0;
     const end = array.length - 1;
     this.root = buildTree(array, start, end);
@@ -235,10 +234,6 @@ class BalancedBinaryTree {
   }
 }
 
-const tree = new BalancedBinaryTree([
-  1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324,
-]);
-
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return;
@@ -252,4 +247,43 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
+let count = 100;
+let array = [];
+
+while (count > 0) {
+  let num = Math.round(Math.random() * 100);
+  array.push(num);
+  count -= 1;
+}
+
+const tree = new BalancedBinaryTree(array);
+
 prettyPrint(tree.root);
+
+console.log(tree.isBalanced(tree.root));
+console.log(tree.levelOrder());
+console.log(tree.preOrder(tree.root));
+console.log(tree.inOrder(tree.root));
+console.log(tree.postOrder(tree.root));
+
+tree.insert(110);
+tree.insert(2000);
+tree.insert(1842);
+tree.insert(4223);
+tree.insert(232);
+tree.insert(2320);
+tree.insert(8908);
+
+prettyPrint(tree.root);
+
+console.log(tree.isBalanced(tree.root));
+
+tree.rebalance();
+
+prettyPrint(tree.root);
+
+console.log(tree.isBalanced(tree.root));
+console.log(tree.levelOrder());
+console.log(tree.preOrder(tree.root));
+console.log(tree.inOrder(tree.root));
+console.log(tree.postOrder(tree.root));
