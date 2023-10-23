@@ -11,3 +11,6 @@
 
 1. JavaScript
 2. Github
+3. ESLint
+4. Prettier
+5. NPM
