@@ -4,7 +4,7 @@
 
 ## Purpose
 
-1. Demonstrate an understaning of ``binary search trees and balanced binary search trees`
+1. Demonstrate an understaning of `binary search trees and balanced binary search trees`
 2. Utilize the `Airbnb Javascript Style Guide`
 
 ## Skills Used
