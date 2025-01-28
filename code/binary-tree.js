@@ -180,7 +180,7 @@ export default class BalancedBinaryTree {
       if (node.left && node.right) {
         const leftSubtree = this.isBalanced(node.left);
         const rightSubtree = this.isBalanced(node.right);
-        return !!(leftSubtree && rightSubtree);
+        return leftSubtree && rightSubtree;
       }
       if (node.left || node.right) {
         const remainingSubtree = node.left || node.right;
